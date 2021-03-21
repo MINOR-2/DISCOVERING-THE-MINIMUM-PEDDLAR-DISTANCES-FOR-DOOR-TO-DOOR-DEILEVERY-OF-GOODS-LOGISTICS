@@ -28,7 +28,7 @@ class Peddlar
         {
             int fit_value=0;
 
-            System.out.println("CITY VISITING PATTERN NO-"+(i+1)+" ");
+            System.out.println("CITY VISITING PATTERN NO- "+(i+1)+" ");
             System.out.print(" | ");
             for(int j=0;j<5;j++)
             {
@@ -54,6 +54,7 @@ class Peddlar
         initialisePickfitnessValue(fit_value_sequence,arr);
 
     }
+    
     void initialiseCityDistance(int n)
     {
         for(int i=0;i<n;i++)
@@ -101,14 +102,7 @@ class Peddlar
         
         int ar[][] = new int[m][m+1];
         ar = sortbyColumn(a,m);
-        /*System.out.println();
-        System.out.println("print");
-        for(int i=0;i<m;i++)
-        {
-            for(int j=0;j<m+1;j++)
-                System.out.print(ar[i][j]+" ");
-            System.out.println();
-        }*/
+        
 		for(int i = 0; i< m-1; i++) {
 			
 			for (int j= 0; j<m-1-i; j++) {
@@ -136,7 +130,7 @@ class Peddlar
             public int compare(final int[] entry1,
             final int[] entry2) {
 
-            if (entry1[col] < entry2[col])
+            if (entry1[col] > entry2[col])
             return 1;
             else
             return -1;
@@ -162,17 +156,77 @@ class Peddlar
         System.out.println();
         System.out.println("The two paths which are selected for crossover are - ");
         
-            System.out.println("Path - 1");
-            for(int j=0;j<m+1;j++)
+            System.out.println("1-> Path - 1");
+            System.out.print("      ");
+            for(int j=0;j<m;j++)
                 System.out.print(selected1[j]+" ");
+                System.out.print("  Fitness value is: "+selected1[m]);
             System.out.println();
-            System.out.println("Path - 2");
-            for(int j=0;j<m+1;j++)
+            System.out.println("2-> Path - 2");
+            System.out.print("      ");
+            for(int j=0;j<m;j++)
                 System.out.print(selected2[j]+" ");
+                System.out.print("  Fitness value is: "+selected2[m]);
             System.out.println();
-            
+        crossover(selected1, selected2,m);    
     }
+    static void crossover(int[] arr1,int[] arr2,int m)
+    {
+        int i;
+        int a1[] = new int[m];
+        int a2[] = new int[m];
+        for(i=0;i<m;i++){
+            a1[i] = arr1[i];
+            a2[i] = arr2[i];
+        }
+        int temp,temp1;
+        
+        for(i=0;i<m/2;i++){
+            temp = a2[i];
+            for(int j=0;j<m;j++){
+                if(a1[j] == temp){
+                temp1 = a1[i];
+                a1[i] = a1[j];
+                a1[j] = temp1;
+                }
+            }
+        }
+        
+        
+        int[] a11 = new int[m];
+        int[] a12 = new int[m];
+        
+        for(i=0;i<m;i++){
+            a11[i] = a1[i];
+        }
+        
+        
+        for(i=0;i<m;i++)
+            a1[i] = arr1[i];
+        
+        for(i=0;i<m/2;i++){
+            temp = a1[i];
+            for(int j=0;j<m;j++){
+                if(a2[j] == temp){
+                temp1 = a2[i];
+                a2[i] = a2[j];
+                a2[j] = temp1;
+                }
+            }
+        }
+        for(i=0;i<m;i++){
+            a12[i] = a2[i];
+        }
+        
+        System.out.println();
+        System.out.println("After Crossover - ");
     
+        for(i=0;i<m;i++)
+            System.out.print(a11[i]+" ");
+            System.out.println();
+        for(i=0;i<m;i++)
+            System.out.print(a12[i]+" ");
+    }
 }
 
 public class Main {
