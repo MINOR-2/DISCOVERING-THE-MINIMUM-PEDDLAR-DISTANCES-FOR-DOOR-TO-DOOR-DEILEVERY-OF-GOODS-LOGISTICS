@@ -55,6 +55,21 @@ class Peddlar
 
     }
     
+    //fitness calculation function
+    /*int calculate_fitness(int[] arr){
+        int n = arr.length;
+        int fit_value = 0;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j+1<n;j++)
+                {
+                    fit_value+=dis[arr[i][j]][arr[i][j+1]];
+                }
+            fit_value=fit_value+dis[arr[i][4]][arr[i][0]];
+        }
+        return fit_value;
+    }*/
+    
     void initialiseCityDistance(int n)
     {
         for(int i=0;i<n;i++)
@@ -139,7 +154,7 @@ class Peddlar
 
         return arr;
         }
-    static void selection (int[][] arr,int m1)
+     void selection (int[][] arr,int m1)
     {
         int m = m1;
         int[] selected1 = new int[m+1];
@@ -170,11 +185,12 @@ class Peddlar
             System.out.println();
         crossover(selected1, selected2,m);    
     }
-    static void crossover(int[] arr1,int[] arr2,int m)
+     void crossover(int[] arr1,int[] arr2,int m)
     {
         int i;
         int a1[] = new int[m];
         int a2[] = new int[m];
+        int fit_value=0;
         for(i=0;i<m;i++){
             a1[i] = arr1[i];
             a2[i] = arr2[i];
@@ -222,11 +238,36 @@ class Peddlar
         System.out.println("After Crossover - ");
     
         for(i=0;i<m;i++)
+        {
             System.out.print(a11[i]+" ");
+            
+        }
+        for(int k=0;k+1<m;k++)
+        {
+        fit_value=fit_value+dis[a11[k]][a11[k+1]];
+
+        }
+        fit_value=fit_value+dis[a11[0]][a11[m-1]];
+        
+        System.out.print("Fitness Value "+fit_value );
+
+        
+        
             System.out.println();
+            
+            fit_value=0;
         for(i=0;i<m;i++)
             System.out.print(a12[i]+" ");
+        for(int k=0;k+1<m;k++)
+        {
+        fit_value=fit_value+dis[a12[k]][a12[k+1]];
+
+        }
+        fit_value=fit_value+dis[a12[0]][a12[m-1]];
+        
+        System.out.print("Fitness Value "+fit_value );
     }
+    
 }
 
 public class Main {
