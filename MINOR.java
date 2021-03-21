@@ -55,20 +55,6 @@ class Peddlar
 
     }
     
-    //fitness calculation function
-    /*int calculate_fitness(int[] arr){
-        int n = arr.length;
-        int fit_value = 0;
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j+1<n;j++)
-                {
-                    fit_value+=dis[arr[i][j]][arr[i][j+1]];
-                }
-            fit_value=fit_value+dis[arr[i][4]][arr[i][0]];
-        }
-        return fit_value;
-    }*/
     
     void initialiseCityDistance(int n)
     {
@@ -96,12 +82,7 @@ class Peddlar
             
         }
             
-        
-        
-        
-        
-        
-    }
+}
     void initialisePickfitnessValue(int[] fit_value_sequence,int[][] arr)
     {
     int m = fit_value_sequence.length;
@@ -266,15 +247,48 @@ class Peddlar
         fit_value=fit_value+dis[a12[0]][a12[m-1]];
         
         System.out.print("Fitness Value "+fit_value );
+        
+                    System.out.println();
+fit_value=0;
+        for(i=0;i<m;i++)
+            System.out.print(arr1[i]+" ");
+        
+        for(int k=0;k+1<m;k++)
+        {
+        fit_value=fit_value+dis[arr1[k]][arr1[k+1]];
+
+        }
+        fit_value=fit_value+dis[arr1[0]][arr1[m-1]];
+        
+        System.out.print("Fitness Value "+fit_value );
+        System.out.println();
+        fit_value=0;
+
+        
+
+        
+        for(i=0;i<m;i++)
+            System.out.print(arr2[i]+" ");
+            
+            for(int k=0;k+1<m;k++)
+        {
+        fit_value=fit_value+dis[arr2[k]][arr2[k+1]];
+
+        }
+        fit_value=fit_value+dis[arr2[0]][arr2[m-1]];
+        
+        System.out.print("Fitness Value "+fit_value );
     }
     
 }
+
 
 public class Main {
     public static void main(String args[]) 
     {
      Peddlar P1=new Peddlar();
      P1.initialiseCityDistance(5);
+     
      P1.initialiseCityOrder(5);
     }
     
