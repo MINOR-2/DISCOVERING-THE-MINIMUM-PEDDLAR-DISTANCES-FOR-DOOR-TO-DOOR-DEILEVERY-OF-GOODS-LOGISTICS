@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math;
 class Peddlar
 {
     Scanner sc=new Scanner(System.in);
@@ -328,9 +329,47 @@ class Peddlar
                 
         System.out.println();
         System.out.println();
-        
+        mutation(a1,m);
     }
     
+	void mutation(int[] a11,int n)
+    {
+        Random dice = new Random();
+        int rand;
+        int row,col,value;                                     
+        rand = 1+dice.nextInt(50);                
+        rand = rand%50;
+        //System.out.println("Rand = "+rand);
+        if (rand==25)   //Possibility of mutation is 2%
+        {
+            col = dice.nextInt(4);
+            row = dice.nextInt(4);
+            
+            //System.out.println("Column = "+col);
+            //System.out.println("Row = "+row);
+            
+            value = a11[col];
+            a11[col] = a11[row];
+            a11[row] = value;
+        } 
+    if(rand==25)
+    {
+        System.out.println("After Mutation - ");
+        
+        for(int i=0;i<n;i++)
+            System.out.print(a11[i]+" ");
+        
+        int fit_value = 0;
+        
+        for(int k=0;k+1<n;k++)
+        {
+            fit_value=fit_value+dis[a11[k]][a11[k+1]];
+        }
+        fit_value=fit_value+dis[a11[0]][a11[n-1]];
+        System.out.println("Fitness Value "+fit_value);
+    }
+    
+    }
 }
 public class Main {
     public static void main(String args[]) 
@@ -341,9 +380,12 @@ public class Main {
      
         P1.initialiseCityOrder(4);
         System.out.println();
-        System.out.println("Enter the number of iterations- ");
-            int n = sc.nextInt();
-        for(int i=0;i<n;i++){
+        
+	System.out.println("Enter the number of iterations- ");
+        int n = sc.nextInt();
+        
+	for(int i=0;i<n;i++)
+	{
             System.out.println("Iteration: "+i);
             P1.sortbyColumn(P1.arr,4);
             P1.selection(P1.arr,4);
